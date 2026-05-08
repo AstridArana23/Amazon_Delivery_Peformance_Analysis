@@ -1,5 +1,5 @@
 ## Overview 
-This project analyzes logistics delivery performance data to identify key factors affecting delivery speed, efficiency, and customer satisfaction. 
+This project analyzes logistics delivery performance data to identify key factors affecting delivery speed, efficiency, and agent ratings. 
 
 By combining Python and ML, the goal is to uncover operational bottlenecks and provide data-driven recommendations to improve delivery reliability and reduce delays.  
 

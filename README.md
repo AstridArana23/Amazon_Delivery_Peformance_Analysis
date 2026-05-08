@@ -8,9 +8,14 @@ Logistics companies often face challenges such as late deliveries, inconsistent 
 - What factors contribute the most to delivery delays?
 - Which regions, carriers, or warehouses perform best or worst?
 - How do delivery delays impact customer satisfaction and package quality?
-- Can we predict whether a delivery will be late? 
+- Can we predict whether a delivery will be late?
 
-## Dataset 
+## 📁 Project Structure 
+- notebooks/ -> Python + Google Colab
+- data/ → raw dataset
+- outputs/ → processed datasets
+
+## 📈 Dataset 
 The dataset contains logistics shipment records with features such as: 
 - order_id
 - rder_date
@@ -26,9 +31,9 @@ The dataset contains logistics shipment records with features such as:
 - damage_flag
 - customer_rating
 
-Source: Simulated Dataset provided by ChatGPT
+Source: Amazon Delivery Dataset | Kaggle
 
-## Tools & Technologies 
+## 🔨 Tools & Technologies 
 - Python
 - Pandas & NumPy
 - Matplotlib & Seaborn
@@ -50,13 +55,16 @@ This project follows a structured end-to-end data science pipeline to ensure rep
 Based on analysis: 
 - Optimize high-delay regions with improved routing strategies
 
-## Project Structure 
-- notebooks/ -> Python + Google Colab
-- data/ → raw dataset
-- outputs/ → processed datasets
+### What I Learned 
+
+
+## How can it be improved? 
+
+
+## Visualizations
 
 ## Author 
 Astrid Arana Rivera
 
-Aspiring Data Scientist
+⚙️ Aspiring Data Scientist
 

@@ -5,10 +5,10 @@ By combining Python and ML, the goal is to uncover operational bottlenecks and p
 
 ## Business Problem
 Logistics companies often face challenges such as late deliveries, inconsistent carrier performance, and regional inefficiencies. This project hopes to answer: 
-- What factors contribute the most to delivery delays?
-- Which regions, carriers, or warehouses perform best or worst?
-- How do delivery delays impact customer satisfaction and package quality?
-- Can we predict whether a delivery will be late?
+- What factors contribute the most to delivery delays (distance, areas, weather)?
+- Which areas or categories perform best or worst?
+- How do delivery delays impact Agent Ratings?
+- Can we predict whether a delivery will be slow?
 
 ## 📁 Project Structure 
 - notebooks/ -> Python + Google Colab

@@ -12,6 +12,14 @@ clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
 #Create title
 st.title("Amazon Delivery Performance Dashboard")
+st.markdown("""
+### Problem
+We aim to identify factors contributing to delivery delays and build a model
+to predict high-risk deliveries.
+
+### Business Goal
+Improve logistics efficiency and reduce late deliveries.
+""")
 
 #Create our KPI Section 
 col1, col2, col3 = st.columns([1,1,1])
@@ -56,7 +64,8 @@ with col_chart2:
     st.pyplot(fig)
 
 st.info("""Semi-Urban areas show the highest delivery delays, suggesting infrastructure or routing inefficiencies. 
-Weather conditions like fog and clouds also significantly increase delivery time.""")
+Weather conditions like fog and clouds also significantly increase delivery time.
+""")
 
 #Model Training Section
 
@@ -72,6 +81,7 @@ model.fit(X, y)
 #User Input Section
 
 st.subheader("Enter Delivery Details")
+st.caption("Model trained using 80/20 train-test split with Random Forest Classifier.")
 
 #create 4 columns for 4 selection boxes
 
@@ -112,3 +122,43 @@ if st.button("Predict"):
         st.error("High Risk: Slow Delivery Expected")
     else:
         st.success("Low Risk: On-Time Delivery Expected")
+
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
+y_pred = model.predict(X)
+
+cm = confusion_matrix(y, y_pred)
+
+fig, ax = plt.subplots()
+sns.heatmap(cm, annot=True, fmt="d", ax=ax)
+st.pyplot(fig)
+
+from sklearn.metrics import classification_report
+
+report = classification_report(y, model.predict(X), output_dict=True)
+st.write(pd.DataFrame(report).transpose())
+
+
+st.info("""
+There seems to be a strong correlation between delivery delay and semi-urban areas.
+This suggests infrastructure and routing inefficiencies.
+Recommendation: optimize dispatch allocation in low-density regions.
+""")
+
+
+
+importances = pd.DataFrame({
+    "feature": feature_columns,
+    "importance": model.feature_importances_
+}).sort_values(by="importance", ascending=False)
+
+st.subheader("Key Drivers of Delivery Delays")
+
+st.bar_chart(importances.set_index("feature"))
+
+st.markdown("""
+### Interpretation:
+Distance and area type are the strongest predictors of delivery delays,
+indicating logistical constraints are more important than weather alone.
+""")

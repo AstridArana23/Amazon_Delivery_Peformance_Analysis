@@ -111,3 +111,8 @@ importances = pd.DataFrame({"feature": X.columns, "importance": model.feature_im
 
 st.header(" What Impacts Delivery Delays Most")
 st.bar_chart(importances.set_index("feature"))
+
+#map visualization
+st.header("Delivery Locations")
+
+st.map(df[["Store_Latitude", "Store_Longitude"]].rename(columns={"Store_Latitude":"lat","Store_Longitude":"lon"}))

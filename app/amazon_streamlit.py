@@ -88,7 +88,7 @@ with col_box4:
 
 def make_prediction(distance, weather, area, category):
 
-    row = pd.DataFrame(np.zeros((1, len(feature_columns))), columns=feature_columns)
+    row = pd.DataFrame(np.zeros((1, len(X_columns))), columns=X_columns)
 
     if "Distance_in_km" in row.columns:
         row["Distance_in_km"] = distance

@@ -79,6 +79,13 @@ This model uses Random Forest to learn patterns between distance, location type,
 It predicts whether a delivery is high-risk based on historical patterns.
 """)
 
+st.subheader("Performance Metrics")
+
+st.write("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
+st.write("Precision:", round(precision_score(y_test, y_pred), 3))
+st.write("Recall:", round(recall_score(y_test, y_pred), 3))
+st.write("F1 Score:", round(f1_score(y_test, y_pred), 3))
+
 cm = confusion_matrix(y_test, y_pred)
 
 fig, ax = plt.subplots()
@@ -101,6 +108,18 @@ st.bar_chart(importances.set_index("feature"))
 st.markdown("""
 Distance and area type are the strongest predictors of delivery delays.
 """)
+
+#insight section
+st.info("""
+Business Insight:
+- Distance is the strongest predictor of delays
+- Semi-Urban areas show systemic inefficiencies
+- Weather has moderate impact
+
+Recommendation:
+Improve routing and dispatch allocation in Semi-Urban regions.
+""")
+
 # PREDICTION SECTION
 st.header("Predict Delivery Delay Risk")
 
@@ -156,3 +175,6 @@ if st.button("Predict"):
         st.error("High Risk: Slow Delivery Expected")
     else:
         st.success("Low Risk: On-Time Delivery Expected")
+
+
+

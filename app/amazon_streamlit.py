@@ -24,7 +24,7 @@ with col2:
     st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
 with col3: 
     avg_time = df["Delivery_Time"].mean():.2f
-    st.metric('Avergae Delivery Time', avg_time)
+    st.metric('Avergae Delivery Time', round(avg_time,2))
 
 #EDA SECTION
 st.header("Exploratory Data Analysis")

@@ -73,6 +73,11 @@ y_pred = model.predict(X_test)
 
 # MODEL EVALUATION
 st.header("Model Evaluation")
+st.subheader("How the Model Works")
+st.write("""
+This model uses Random Forest to learn patterns between distance, location type, weather, and delivery delays.
+It predicts whether a delivery is high-risk based on historical patterns.
+""")
 
 cm = confusion_matrix(y_test, y_pred)
 

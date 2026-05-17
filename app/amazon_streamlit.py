@@ -15,10 +15,22 @@ from sklearn.metrics import (
     recall_score,
     f1_score
 )
-
+#layout our page
+st.set_page_config(
+    page_title="Logistics ML Dashboard",
+    layout="wide"
+)
 # LOAD DATA
 df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
+
+# SIDEBAR NAV STYLE
+# =========================
+st.sidebar.title(" Navigation")
+section = st.sidebar.radio(
+    "Go to",
+    ["Overview", "EDA", "Model Performance", "Prediction Tool"]
+)
 
 # TITLE
 st.title("Amazon Delivery Performance Dashboard")

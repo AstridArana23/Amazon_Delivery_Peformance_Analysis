@@ -14,7 +14,7 @@ clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 st.title("Amazon Delivery Performance Dashboard")
 
 #Create our KPI Section 
-col1, col2 = st.columns([1,1])
+col1, col2, col3 = st.columns([1,1,1])
 
 with col1:
     total = len(df)
@@ -22,6 +22,9 @@ with col1:
 with col2: 
     slow_rate = df["Slow_Delivery"].mean() * 100
     st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
+with col3: 
+    avg_time = df["Delivery_Time"].mean():.2f
+    st.metric('Avergae Delivery Time', avg_time)
 
 #EDA SECTION
 st.header("Exploratory Data Analysis")

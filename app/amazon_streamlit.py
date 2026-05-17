@@ -115,9 +115,3 @@ if st.button("Predict"):
         st.error("High Risk: Slow Delivery Expected")
     else:
         st.success("Low Risk: On-Time Delivery Expected")
-
-#Show feature importance
-importances = pd.DataFrame({"feature": X.columns, "importance": model.feature_importances_}).sort_values(by="importance", ascending=False)
-
-st.header(" What Impacts Delivery Delays Most")
-st.bar_chart(importances.set_index("feature"))

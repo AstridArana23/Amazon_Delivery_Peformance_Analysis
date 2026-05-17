@@ -64,7 +64,7 @@ with tab1:
     col2.metric("Slow Delivery Rate", f"{df['Slow_Delivery'].mean()*100:.2f}%")
     col3.metric("Avg Delivery Time", f"{clean_df['Delivery_Time'].mean():.2f}")
 
-    """Exploratory Data Analysis"""
+    st.subheader("Exploratory Data Analysis")
 
     col1, col2 = st.columns(2)
 

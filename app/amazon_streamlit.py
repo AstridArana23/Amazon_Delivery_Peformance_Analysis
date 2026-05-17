@@ -7,7 +7,7 @@ import seaborn as sns
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, precision_score
 
 # LOAD DATA
 df = pd.read_csv("output/amazon_model_dataset.csv")

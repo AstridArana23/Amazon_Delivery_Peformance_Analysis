@@ -52,7 +52,7 @@ with col_chart2:
     ax.set_title("Median Delivery Time by Weather Type")
     st.pyplot(fig)
 
-"""Model Training Section"""
+#Model Training Section
 
 st.header("Predict Delivery Delay Risk")
 
@@ -63,7 +63,7 @@ y = df["Slow_Delivery"]
 model = RandomForestClassifier(n_estimators=200, random_state=42)
 model.fit(X, y)
 
-"""User Input Section"""
+#User Input Section
 
 st.subheader("Enter Delivery Details")
 
@@ -72,8 +72,6 @@ distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)
 weather = st.selectbox("Weather", [col.replace("Weather_", "") for col in X.columns if "Weather_" in col])
 area = st.selectbox("Area", [col.replace("Area_", "") for col in X.columns if "Area_" in col])
 category = st.selectbox("Category", [col.replace("Category_", "") for col in X.columns if "Category_" in col])
-
-"""Prediction Function"""
 
 def make_prediction(distance, weather, area, category):
     row = pd.DataFrame([np.zeros(len(X.columns))], columns=X.columns)

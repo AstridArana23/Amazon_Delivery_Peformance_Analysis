@@ -12,7 +12,8 @@ Logistics companies often face challenges such as late deliveries, inconsistent 
 
 ## 📁 Project Structure 
 - notebooks/ -> Python + Google Colab
-- data/ → raw dataset
+- data/ -> raw dataset
+- output/ -> cleaned + featured + model data
 
 ## 📈 Dataset 
 The dataset contains logistics shipment records with features such as: 

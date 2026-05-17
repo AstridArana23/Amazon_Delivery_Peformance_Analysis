@@ -69,7 +69,7 @@ st.subheader("Enter Delivery Details")
 
 #create 4 columns for 4 selection boxes
 
-col_box1, col_box2, col_box3, col_box4 = ([3,3,3,3])
+col_box1, col_box2, col_box3, col_box4 = st.columns([3,3,3,3])
 
 with col_box1: 
     distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)

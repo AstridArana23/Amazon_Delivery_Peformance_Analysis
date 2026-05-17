@@ -24,30 +24,25 @@ st.set_page_config(
 df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
-# SIDEBAR NAV STYLE
-# =========================
-st.sidebar.title(" Navigation")
-section = st.sidebar.radio(
-    "Go to",
-    ["Overview", "EDA", "Model Performance", "Prediction Tool"]
-)
+# Create our tabs
+tab1, tab2, tab3, tab4 = st.tabs(["Overview","EDA","Model Performance","Prediction Tool"])
 
 # TITLE
-st.title("Amazon Delivery Performance Dashboard")
-
-st.markdown("""
-### Business Problem + Goal: 
-Identify factors contributing to delivery delays and predict high-risk deliveries to improve logistics efficiency and reduce late deliveries.
-""")
-
+with tab1: 
+    st.title("Amazon Delivery Performance Dashboard")
+    st.markdown("""
+    ### Business Problem + Goal: 
+    Identify factors contributing to delivery delays and predict high-risk deliveries to improve logistics efficiency and reduce late deliveries.
+    """)
+    st.divier()
 # KPI SECTION
-st.header("Key Metrics")
+    st.header("Key Metrics")
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-col1.metric("Total Deliveries", len(df))
-col2.metric("Slow Delivery Rate (%)", round(df["Slow_Delivery"].mean() * 100, 2))
-col3.metric("Avg Delivery Time", round(clean_df["Delivery_Time"].mean(), 2))
+    col1.metric("Total Deliveries", len(df))
+    col2.metric("Slow Delivery Rate (%)", round(df["Slow_Delivery"].mean() * 100, 2))
+    col3.metric("Avg Delivery Time", round(clean_df["Delivery_Time"].mean(), 2))
 
 # EDA SECTION
 st.header("Exploratory Data Analysis")

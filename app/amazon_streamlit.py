@@ -8,6 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 #Load dataset
 df = pd.read_csv("output/amazon_model_dataset.csv")
+clean_df = pd.read_csv("output/amazon_cleaned_dataset.csv")
 
 #Create title
 st.title("Amazon Delivery Performance Dashboard")
@@ -30,7 +31,7 @@ col_chart1, col_chart2 = st.columns([2,2])
 
 #First bar chart 
 with col_chart1:
-    area_data = df.groupby("Area")["Delivery_Time"].median()
+    area_data = clean_df.groupby("Area")["Delivery_Time"].median()
     
     fig, ax = plt.subplots()
     area_data.plot(kind =Area, ax=ax)
@@ -41,7 +42,7 @@ with col_chart1:
     st.pyplot(fig)
 
 with col_chart2:
-    weather_data = df.groupby("Weather")["Delivery_Time"].median()
+    weather_data = clean_df.groupby("Weather")["Delivery_Time"].median()
 
     fig, ax = plt.subplots()
     weather_data.plot(kind="bar", ax=ax)

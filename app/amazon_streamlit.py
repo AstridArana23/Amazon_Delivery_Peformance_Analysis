@@ -115,4 +115,4 @@ st.bar_chart(importances.set_index("feature"))
 #map visualization
 st.header("Delivery Locations")
 
-st.map(clean_df[["Store_Latitude", "Store_Longitude"]].rename(columns={"Store_Latitude":"lat","Store_Longitude":"lon"}))
+st.map(clean_df[["Drop_Latitude", "Drop_Longitude"]].rename(columns={"Drop_Latitude":"lat","Drop_Longitude":"lon"}))

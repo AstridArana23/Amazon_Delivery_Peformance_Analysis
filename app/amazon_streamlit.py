@@ -14,13 +14,12 @@ df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
 # TITLE
-st.title("📦 Amazon Delivery Performance Dashboard")
+st.title("Amazon Delivery Performance Dashboard")
 
 st.markdown("""
-### Problem
-We identify factors contributing to delivery delays and predict high-risk deliveries.
+### Business Problem: Identify factors contributing to delivery delays and predict high-risk deliveries.
 
-### Business Goal
+### Goal: 
 Improve logistics efficiency and reduce late deliveries.
 """)
 

@@ -22,9 +22,9 @@ with col2:
     slow_rate = df["Slow_Delivery"].mean() * 100
     st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
 
-"""Data Exploration Section"""
+#EDA SECTION
 
-st.header("Delivery Analysis")
+st.header("Exploratory Data Analysis")
 
 if "Area" in df.columns:
     area_data = df.groupby("Area")["Slow_Delivery"].mean()

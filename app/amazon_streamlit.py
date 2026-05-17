@@ -6,20 +6,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 
-"""Load Dataset"""
+#Load dataset
 df = pd.read_csv("output/amazon_model_dataset.csv")
 
+#Create title
 st.title("Amazon Delivery Performance Dashboard")
 
-"""Create KPI Section"""
+#Create our KPI Section 
+col1, col2 = st.columns([1,1])
 
-st.header("Key Performance Indicators")
-
-total = len(df)
-slow_rate = df["Slow_Delivery"].mean() * 100
-
-st.metric("Total Deliveries", total)
-st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
+with col1:
+    total = len(df)
+    st.metric("Total Deliveries", total)
+with col2: 
+    slow_rate = df["Slow_Delivery"].mean() * 100
+    st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
 
 """Data Exploration Section"""
 

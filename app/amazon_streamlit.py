@@ -93,8 +93,9 @@ def make_prediction(distance, weather, area, category):
         row[f"Category_{category}"] = 1
 
     return model.predict(row)[0]
+
 # Create Predict Button
-if st.button("Predict Delay Risk"):
+if st.button("Predict"):
     result = make_prediction(distance, weather, area, category)
 
     if result == 1:

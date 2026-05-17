@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 """Load data"""
 
-df = pd.read_csv("/output/amazon_model_dataset.csv")
+df = pd.read_csv("amazon_model_dataset.csv")
 
 st.title("Logistics Delivery Performance Dashboard")
 st.subheader("ML + Data Analysis Project")

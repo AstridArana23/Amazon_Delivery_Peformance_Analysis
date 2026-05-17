@@ -121,13 +121,3 @@ importances = pd.DataFrame({"feature": X.columns, "importance": model.feature_im
 
 st.header(" What Impacts Delivery Delays Most")
 st.bar_chart(importances.set_index("feature"))
-
-#map visualization
-st.header("Delivery Locations")
-
-map_df = clean_df[["Drop_Latitude", "Drop_Longitude"]].dropna()
-
-st.map(map_df.rename(columns={
-    "Drop_Latitude": "lat",
-    "Drop_Longitude": "lon"
-}))

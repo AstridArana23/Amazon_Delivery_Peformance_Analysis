@@ -44,12 +44,7 @@ y_pred = model.predict(X_test)
 
 # TABS
 
-tab1, tab2, tab3, tab4 = st.tabs([
-    "Overview",
-    " EDA",
-    "Model Performance",
-    "Prediction Tool"
-])
+tab1, tab2, tab3, tab4 = st.tabs(["Overview", "EDA","Model Performance","Prediction Tool"])
 
 # TAB 1: OVERVIEW
 with tab1:
@@ -96,7 +91,7 @@ with tab2:
 
     st.info("""
     Semi-Urban areas show the highest delays.
-    Weather like fog and clouds increase delivery time significantly.
+    Weather such as fog and clouds significantly increases delivery time.
     """)
 
 # TAB 3: MODEL PERFORMANCE
@@ -192,7 +187,7 @@ with tab4:
         result = make_prediction(distance, weather, area, category)
 
         if result == 1:
-            st.error("⚠ High Risk: Slow Delivery Expected")
+            st.error("High Risk: Slow Delivery Expected")
         else:
             st.success("Low Risk: On-Time Delivery Expected")
 

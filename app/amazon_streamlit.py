@@ -23,24 +23,32 @@ with col2:
     st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
 
 #EDA SECTION
-
 st.header("Exploratory Data Analysis")
 
-if "Area" in df.columns:
-    area_data = df.groupby("Area")["Slow_Delivery"].mean()
+#create 2 columns for 2 charts
+col_chart1, col_chart2 = st.columns([2,2])
 
+#First bar chart 
+with col_chart1:
+    area_data = df.groupby("Area")["Delivery_Time"].median()
+    
     fig, ax = plt.subplots()
-    area_data.plot(kind="bar", ax=ax)
-    plt.title("Slow Delivery Rate by Area")
+    area_data.plot(kind =Area, ax=ax)
+    
+    ax.set_ylabel("Median Delivery Time")
+    ax.set_xlabel("Area")
+    ax.set_title("Median Delivery Time by Area")
     st.pyplot(fig)
 
-if "Weather" in df.columns:
-    weather_data = df.groupby("Weather")["Slow_Delivery"].mean()
+with col_chart2:
+    weather_data = df.groupby("Weather")["Delivery_Time"].median()
 
     fig, ax = plt.subplots()
-    weather_data.plot(kind="bar", ax=ax, color="orange")
-    plt.title("Slow Delivery Rate by Weather")
-    plt.xticks(rotation=45)
+    weather_data.plot(kind="bar", ax=ax)
+    
+    ax.set_ylabel("Median Delivery Time")
+    ax.set_xlabel("Weather")
+    ax.set_title("Median Delivery Time by Weather Type")
     st.pyplot(fig)
 
 """Model Training Section"""

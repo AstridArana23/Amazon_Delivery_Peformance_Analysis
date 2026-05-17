@@ -10,9 +10,6 @@ from sklearn.ensemble import RandomForestClassifier
 df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
-
-tab1, tab2, tab3 = st.tabs(["Overview", "EDA", "Prediction"])
-
 #Create title
 st.title("Amazon Delivery Performance Dashboard")
 

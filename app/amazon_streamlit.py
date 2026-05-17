@@ -6,12 +6,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 
-"""Load data"""
-
+#Load Dataset
 df = pd.read_csv("output/amazon_model_dataset.csv")
 
-st.title("Logistics Delivery Performance Dashboard")
-st.subheader("ML + Data Analysis Project")
+st.title("Amazon Delivery Performance Dashboard")
 
 """Create KPI Section"""
 

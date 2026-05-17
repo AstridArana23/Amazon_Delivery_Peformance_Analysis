@@ -44,7 +44,7 @@ y_pred = model.predict(X_test)
 
 # TABS
 
-tab1, tab2, tab3, tab4 = st.tabs(["Overview", "EDA","Model Performance","Prediction Tool"])
+tab1, tab2, tab3 = st.tabs(["Overview", "Model Performance","Prediction Tool"])
 
 # TAB 1: OVERVIEW
 with tab1:
@@ -91,8 +91,8 @@ with tab1:
     Weather such as fog and clouds significantly increases delivery time.
     """)
 
-# TAB 3: MODEL PERFORMANCE
-with tab3:
+# TAB 2: MODEL PERFORMANCE
+with tab2:
 
     st.title(" Model Performance")
     st.subheader("How the Model Works") 
@@ -133,8 +133,8 @@ with tab3:
     st.bar_chart(importances.set_index("feature"))
     st.markdown(""" Distance and area type are the strongest predictors of delivery delays. """)
 
-# TAB 4: PREDICTION
-with tab4:
+# TAB 3: PREDICTION
+with tab3:
 
     st.title(" Predict Delivery Delay Risk")
 

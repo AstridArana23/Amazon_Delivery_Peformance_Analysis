@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 
-#Load Dataset
+"""Load Dataset"""
 df = pd.read_csv("output/amazon_model_dataset.csv")
 
 st.title("Amazon Delivery Performance Dashboard")

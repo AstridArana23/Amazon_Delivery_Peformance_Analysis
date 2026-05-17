@@ -17,7 +17,8 @@ clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 st.title("Amazon Delivery Performance Dashboard")
 
 st.markdown("""
-### Business Problem: Identify factors contributing to delivery delays and predict high-risk deliveries.
+### Business Problem: 
+Identify factors contributing to delivery delays and predict high-risk deliveries.
 
 ### Goal: 
 Improve logistics efficiency and reduce late deliveries.

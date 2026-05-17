@@ -58,7 +58,7 @@ with tab1:
 
     st.markdown("""
     **Business Objective:**  
-    Predict and reduce delivery delays using machine learning.
+    Predict and reduce delivery delays using machine learning, considering distance in km, area, weather, and category
     """)
 
     st.divider()
@@ -103,6 +103,9 @@ with tab2:
 with tab3:
 
     st.title(" Model Performance")
+    st.subheader("How the Model Works") 
+    st.write(""" This model uses Random Forest to learn patterns between distance, location type, weather, and delivery delays. 
+    It predicts whether a delivery is high-risk based on historical patterns. """)
 
     col1, col2 = st.columns(2)
 
@@ -136,6 +139,7 @@ with tab3:
     }).sort_values(by="importance", ascending=False)
 
     st.bar_chart(importances.set_index("feature"))
+    st.markdown(""" Distance and area type are the strongest predictors of delivery delays. """)
 
 # TAB 4: PREDICTION
 with tab4:

@@ -24,7 +24,7 @@ with col2:
     st.metric("Slow Delivery Rate (%)", round(slow_rate, 2))
 with col3: 
     avg_time = clean_df["Delivery_Time"].mean()
-    st.metric('Avergae Delivery Time', round(avg_time,2))
+    st.metric('Avergae Delivery Time (days)', round(avg_time,2))
 
 #EDA SECTION
 st.header("Exploratory Data Analysis")
@@ -105,3 +105,9 @@ if st.button("Predict"):
         st.error("High Risk: Slow Delivery Expected")
     else:
         st.success("Low Risk: On-Time Delivery Expected")
+
+#Show feature importance
+importances = pd.DataFrame({"feature": X.columns, "importance": model.feature_importances_}).sort_values(by="importance", ascending=False)
+
+st.header(" What Impacts Delivery Delays Most")
+st.bar_chart(importances.set_index("feature"))

@@ -55,6 +55,14 @@ with col_chart2:
     ax.set_title("Median Delivery Time by Weather Type")
     st.pyplot(fig)
 
+'''Insights'''
+
+st.info("""
+Insight:
+Semi-Urban areas show the highest delivery delays, suggesting infrastructure or routing inefficiencies.
+Weather conditions like fog and clouds also significantly increase delivery time.
+""")
+
 #Model Training Section
 
 st.header("Predict Delivery Delay Risk")
@@ -84,14 +92,18 @@ with col_box4:
     category = st.selectbox("Category", [col.replace("Category_", "") for col in X.columns if "Category_" in col])
 
 def make_prediction(distance, weather, area, category):
-    row = pd.DataFrame([np.zeros(len(X.columns))], columns=X.columns)
 
-    row["Distance_in_km"] = distance
+    row = pd.DataFrame(np.zeros((1, len(feature_columns))), columns=feature_columns)
+
+    if "Distance_in_km" in row.columns:
+        row["Distance_in_km"] = distance
 
     if f"Weather_{weather}" in row.columns:
         row[f"Weather_{weather}"] = 1
+
     if f"Area_{area}" in row.columns:
         row[f"Area_{area}"] = 1
+
     if f"Category_{category}" in row.columns:
         row[f"Category_{category}"] = 1
 

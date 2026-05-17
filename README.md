@@ -14,6 +14,7 @@ Logistics companies often face challenges such as late deliveries, inconsistent 
 - notebooks/ -> Python + Google Colab
 - data/ -> raw dataset
 - output/ -> cleaned + featured + model data
+- app/ -> streamlit application dashboard
 
 ## 📈 Dataset 
 The dataset contains logistics shipment records with features such as: 
@@ -40,6 +41,7 @@ Source: Amazon Delivery Dataset | Kaggle
 - Matplotlib & Seaborn
 - Scikit-learn
 - Google Colab
+- Streamlit
 
 ## Workflow
 This project follows a structured end-to-end data science pipeline to ensure reproducibility and clear business alignment.

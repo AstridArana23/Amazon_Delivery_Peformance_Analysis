@@ -10,6 +10,9 @@ from sklearn.ensemble import RandomForestClassifier
 df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
+
+tab1, tab2, tab3 = st.tabs(["Overview", "EDA", "Prediction"])
+
 #Create title
 st.title("Amazon Delivery Performance Dashboard")
 
@@ -55,13 +58,8 @@ with col_chart2:
     ax.set_title("Median Delivery Time by Weather Type")
     st.pyplot(fig)
 
-'''Insights'''
-
-st.info("""
-Insight:
-Semi-Urban areas show the highest delivery delays, suggesting infrastructure or routing inefficiencies.
-Weather conditions like fog and clouds also significantly increase delivery time.
-""")
+st.info("""Semi-Urban areas show the highest delivery delays, suggesting infrastructure or routing inefficiencies. 
+Weather conditions like fog and clouds also significantly increase delivery time.""")
 
 #Model Training Section
 
@@ -127,7 +125,12 @@ st.bar_chart(importances.set_index("feature"))
 #map visualization
 st.header("Delivery Locations")
 
-st.map(clean_df[["Drop_Latitude", "Drop_Longitude"]].rename(columns={"Drop_Latitude":"lat","Drop_Longitude":"lon"}))
+map_df = clean_df[["Drop_Latitude", "Drop_Longitude"]].dropna()
+
+st.map(map_df.rename(columns={
+    "Drop_Latitude": "lat",
+    "Drop_Longitude": "lon"
+}))
 
 #Filtered data report
 st.sidebar.header("🔍 Filters")

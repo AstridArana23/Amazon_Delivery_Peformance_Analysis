@@ -67,11 +67,18 @@ model.fit(X, y)
 
 st.subheader("Enter Delivery Details")
 
-distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)
+#create 4 columns for 4 selection boxes
 
-weather = st.selectbox("Weather", [col.replace("Weather_", "") for col in X.columns if "Weather_" in col])
-area = st.selectbox("Area", [col.replace("Area_", "") for col in X.columns if "Area_" in col])
-category = st.selectbox("Category", [col.replace("Category_", "") for col in X.columns if "Category_" in col])
+col_box1, col_box2, col_box3, col_box4 = ([3,3,3,3])
+
+with col_box1: 
+    distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)
+with col_box2: 
+    weather = st.selectbox("Weather", [col.replace("Weather_", "") for col in X.columns if "Weather_" in col])
+with col_box3: 
+    area = st.selectbox("Area", [col.replace("Area_", "") for col in X.columns if "Area_" in col])
+with col_box4: 
+    category = st.selectbox("Category", [col.replace("Category_", "") for col in X.columns if "Category_" in col])
 
 def make_prediction(distance, weather, area, category):
     row = pd.DataFrame([np.zeros(len(X.columns))], columns=X.columns)

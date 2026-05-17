@@ -59,8 +59,6 @@ Weather like fog and clouds increases delivery time significantly.
 """)
 
 # MODEL TRAINING
-st.header("Model Training")
-
 X = df.drop("Slow_Delivery", axis=1)
 y = df["Slow_Delivery"]
 

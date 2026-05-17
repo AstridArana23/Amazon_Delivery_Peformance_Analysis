@@ -34,7 +34,7 @@ with col_chart1:
     area_data = clean_df.groupby("Area")["Delivery_Time"].median()
     
     fig, ax = plt.subplots()
-    area_data.plot(kind =Area, ax=ax)
+    area_data.plot(kind ="bar", ax=ax)
     
     ax.set_ylabel("Median Delivery Time")
     ax.set_xlabel("Area")

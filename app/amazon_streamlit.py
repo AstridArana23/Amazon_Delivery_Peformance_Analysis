@@ -15,62 +15,19 @@ from sklearn.metrics import (
     recall_score,
     f1_score
 )
-#layout our page
+
+# PAGE CONFIG
 st.set_page_config(
     page_title="Logistics ML Dashboard",
     layout="wide"
 )
+
+
 # LOAD DATA
+
 df = pd.read_csv("output/amazon_model_dataset.csv")
 clean_df = pd.read_csv("output/amazon_cleaned_data.csv")
 
-# Create our tabs
-tab1, tab2, tab3, tab4 = st.tabs(["Overview","EDA","Model Performance","Prediction Tool"])
-
-# TITLE
-with tab1: 
-    st.title("Amazon Delivery Performance Dashboard")
-    st.markdown("""
-    ### Business Problem + Goal: 
-    Identify factors contributing to delivery delays and predict high-risk deliveries to improve logistics efficiency and reduce late deliveries.
-    """)
-    st.divier()
-# KPI SECTION
-    st.header("Key Metrics")
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric("Total Deliveries", len(df))
-    col2.metric("Slow Delivery Rate (%)", round(df["Slow_Delivery"].mean() * 100, 2))
-    col3.metric("Avg Delivery Time", round(clean_df["Delivery_Time"].mean(), 2))
-
-# EDA SECTION
-st.header("Exploratory Data Analysis")
-
-col_chart1, col_chart2 = st.columns(2)
-
-with col_chart1:
-    area_data = clean_df.groupby("Area")["Delivery_Time"].median()
-
-    fig, ax = plt.subplots()
-    area_data.plot(kind="bar", ax=ax)
-    ax.set_title("Median Delivery Time by Area")
-    ax.set_ylabel("Delivery Time")
-    st.pyplot(fig)
-
-with col_chart2:
-    weather_data = clean_df.groupby("Weather")["Delivery_Time"].median()
-
-    fig, ax = plt.subplots()
-    weather_data.plot(kind="bar", ax=ax)
-    ax.set_title("Median Delivery Time by Weather")
-    ax.set_ylabel("Delivery Time")
-    st.pyplot(fig)
-
-st.info("""
-Semi-Urban areas show the highest delivery delays.
-Weather like fog and clouds increases delivery time significantly.
-""")
 
 # MODEL TRAINING
 X = df.drop("Slow_Delivery", axis=1)
@@ -85,110 +42,154 @@ model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
-# MODEL EVALUATION
-st.header("Model Evaluation")
-st.subheader("How the Model Works")
-st.write("""
-This model uses Random Forest to learn patterns between distance, location type, weather, and delivery delays.
-It predicts whether a delivery is high-risk based on historical patterns.
-""")
+# TABS
 
-st.subheader("Performance Metrics")
+tab1, tab2, tab3, tab4 = st.tabs([
+    "Overview",
+    " EDA",
+    "Model Performance",
+    "Prediction Tool"
+])
 
-st.write("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
-st.write("Precision:", round(precision_score(y_test, y_pred), 3))
-st.write("Recall:", round(recall_score(y_test, y_pred), 3))
-st.write("F1 Score:", round(f1_score(y_test, y_pred), 3))
+# TAB 1: OVERVIEW
+with tab1:
 
-cm = confusion_matrix(y_test, y_pred)
+    st.title("Logistics Delivery Performance Dashboard")
 
-fig, ax = plt.subplots()
-sns.heatmap(cm, annot=True, fmt="d", ax=ax)
-st.pyplot(fig)
+    st.markdown("""
+    **Business Objective:**  
+    Predict and reduce delivery delays using machine learning.
+    """)
 
-report = classification_report(y_test, y_pred, output_dict=True)
-st.dataframe(pd.DataFrame(report).transpose())
+    st.divider()
 
-# FEATURE IMPORTANCE
-st.header("Key Drivers of Delivery Delays")
+    col1, col2, col3 = st.columns(3)
 
-importances = pd.DataFrame({
-    "feature": X.columns,
-    "importance": model.feature_importances_
-}).sort_values(by="importance", ascending=False)
+    col1.metric("Total Deliveries", len(df))
+    col2.metric("Slow Delivery Rate", f"{df['Slow_Delivery'].mean()*100:.2f}%")
+    col3.metric("Avg Delivery Time", f"{clean_df['Delivery_Time'].mean():.2f}")
 
-st.bar_chart(importances.set_index("feature"))
+# TAB 2: EDA
+with tab2:
 
-st.markdown("""
-Distance and area type are the strongest predictors of delivery delays.
-""")
+    st.title("Exploratory Data Analysis")
 
-#insight section
-st.info("""
-Business Insight:
-- Distance is the strongest predictor of delays
-- Semi-Urban areas show systemic inefficiencies
-- Weather has moderate impact
+    col1, col2 = st.columns(2)
 
-Recommendation:
-Improve routing and dispatch allocation in Semi-Urban regions.
-""")
+    with col1:
+        st.subheader("Delivery Time by Area")
+        area_data = clean_df.groupby("Area")["Delivery_Time"].median()
 
-# PREDICTION SECTION
-st.header("Predict Delivery Delay Risk")
+        fig, ax = plt.subplots()
+        area_data.plot(kind="bar", ax=ax)
+        ax.set_ylabel("Median Delivery Time")
+        st.pyplot(fig)
 
-st.subheader("Enter Delivery Details")
+    with col2:
+        st.subheader("Delivery Time by Weather")
+        weather_data = clean_df.groupby("Weather")["Delivery_Time"].median()
 
-col1, col2, col3, col4 = st.columns(4)
+        fig, ax = plt.subplots()
+        weather_data.plot(kind="bar", ax=ax)
+        ax.set_ylabel("Median Delivery Time")
+        st.pyplot(fig)
 
-with col1:
-    distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)
+    st.info("""
+    Semi-Urban areas show the highest delays.
+    Weather like fog and clouds increase delivery time significantly.
+    """)
 
-with col2:
-    weather = st.selectbox(
-        "Weather",
-        [c.replace("Weather_", "") for c in X.columns if "Weather_" in c]
-    )
+# TAB 3: MODEL PERFORMANCE
+with tab3:
 
-with col3:
-    area = st.selectbox(
-        "Area",
-        [c.replace("Area_", "") for c in X.columns if "Area_" in c]
-    )
+    st.title(" Model Performance")
 
-with col4:
-    category = st.selectbox(
-        "Category",
-        [c.replace("Category_", "") for c in X.columns if "Category_" in c]
-    )
+    col1, col2 = st.columns(2)
 
-# PREDICTION FUNCTION
-def make_prediction(distance, weather, area, category):
+    with col1:
+        st.subheader("Confusion Matrix")
 
-    row = pd.DataFrame(np.zeros((1, len(X.columns))), columns=X.columns)
+        cm = confusion_matrix(y_test, y_pred)
 
-    if "Distance_in_km" in row.columns:
-        row["Distance_in_km"] = distance
+        fig, ax = plt.subplots()
+        sns.heatmap(cm, annot=True, fmt="d", ax=ax)
+        st.pyplot(fig)
 
-    if f"Weather_{weather}" in row.columns:
-        row[f"Weather_{weather}"] = 1
+    with col2:
+        st.subheader("Metrics")
 
-    if f"Area_{area}" in row.columns:
-        row[f"Area_{area}"] = 1
+        st.metric("Accuracy", f"{accuracy_score(y_test, y_pred):.3f}")
+        st.metric("Precision", f"{precision_score(y_test, y_pred):.3f}")
+        st.metric("Recall", f"{recall_score(y_test, y_pred):.3f}")
+        st.metric("F1 Score", f"{f1_score(y_test, y_pred):.3f}")
 
-    if f"Category_{category}" in row.columns:
-        row[f"Category_{category}"] = 1
+    st.subheader("Classification Report")
 
-    return model.predict(row)[0]
+    report = classification_report(y_test, y_pred, output_dict=True)
+    st.dataframe(pd.DataFrame(report).transpose())
 
-# OUTPUT
-if st.button("Predict"):
-    result = make_prediction(distance, weather, area, category)
+    st.subheader("Feature Importance")
 
-    if result == 1:
-        st.error("High Risk: Slow Delivery Expected")
-    else:
-        st.success("Low Risk: On-Time Delivery Expected")
+    importances = pd.DataFrame({
+        "feature": X.columns,
+        "importance": model.feature_importances_
+    }).sort_values(by="importance", ascending=False)
 
+    st.bar_chart(importances.set_index("feature"))
+
+# TAB 4: PREDICTION
+with tab4:
+
+    st.title(" Predict Delivery Delay Risk")
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        distance = st.number_input("Distance (km)", min_value=0.0, value=10.0)
+
+    with col2:
+        weather = st.selectbox(
+            "Weather",
+            [c.replace("Weather_", "") for c in X.columns if "Weather_" in c]
+        )
+
+    with col3:
+        area = st.selectbox(
+            "Area",
+            [c.replace("Area_", "") for c in X.columns if "Area_" in c]
+        )
+
+    with col4:
+        category = st.selectbox(
+            "Category",
+            [c.replace("Category_", "") for c in X.columns if "Category_" in c]
+        )
+
+    def make_prediction(distance, weather, area, category):
+
+        row = pd.DataFrame(columns=X.columns)
+        row.loc[0] = 0
+
+        if "Distance_in_km" in row.columns:
+            row["Distance_in_km"] = distance
+
+        if f"Weather_{weather}" in row.columns:
+            row[f"Weather_{weather}"] = 1
+
+        if f"Area_{area}" in row.columns:
+            row[f"Area_{area}"] = 1
+
+        if f"Category_{category}" in row.columns:
+            row[f"Category_{category}"] = 1
+
+        return model.predict(row)[0]
+
+    if st.button("Predict"):
+        result = make_prediction(distance, weather, area, category)
+
+        if result == 1:
+            st.error("⚠ High Risk: Slow Delivery Expected")
+        else:
+            st.success("Low Risk: On-Time Delivery Expected")
 
 

@@ -116,3 +116,22 @@ st.bar_chart(importances.set_index("feature"))
 st.header("Delivery Locations")
 
 st.map(clean_df[["Drop_Latitude", "Drop_Longitude"]].rename(columns={"Drop_Latitude":"lat","Drop_Longitude":"lon"}))
+
+#Filtered data report
+st.sidebar.header("🔍 Filters")
+
+selected_area = st.sidebar.selectbox("Area", df["Area"].unique())
+selected_weather = st.sidebar.selectbox("Weather", df["Weather"].unique())
+
+df_filtered = df[
+    (df["Area"] == selected_area) &
+    (df["Weather"] == selected_weather)
+]
+
+csv = df_filtered.to_csv(index=False)
+st.download_button(
+    "Download Filtered Data",
+    csv,
+    "logistics_report.csv",
+    "text/csv"
+)

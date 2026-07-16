@@ -68,6 +68,8 @@ By focusing on Semi‑Urban regions and visibility‑related weather conditions,
 
 ## How can it be improved? 
 - I think the streamlit app can be improved. I would like to learn if there some way where training does not happen each time the app runs, so results can load much quicker
+- Make a Tableau Dashboard showing KPIs
+- Show the  r2, MAE, and RMSE of the ML models
 
 # What I learned
 - In this project, I got the opportunity to apply my basic knowledge of StreamLit. 

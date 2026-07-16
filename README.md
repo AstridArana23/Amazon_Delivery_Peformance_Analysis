@@ -49,7 +49,7 @@ This project follows a structured end-to-end data science pipeline to ensure rep
 2. Data Collection
 3. Data Cleaning & Wrangling
 4. Exploratory Data Analysis (EDA)
-6. Predictive Modeling using machine learning models
+6. Predictive Modeling using machine learning models (Linear Regression vs RandomForest)
 7. Conclusion
 
 
